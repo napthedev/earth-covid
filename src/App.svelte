@@ -1,13 +1,16 @@
 <script>
   import { getData } from "./services/api";
   import Main from "./components/Main.svelte";
+  import Virus from "./components/icons/Virus.svelte";
+  import EarthIcon from "./components/icons/EarthIcon.svelte";
+  import Error from "./components/icons/Error.svelte";
 </script>
 
 {#await getData()}
   <main>
     <div style="display: flex; gap: 10px">
-      <img src="/icon.svg" alt="" />
-      <img src="/earth-icon.svg" alt="" />
+      <Virus />
+      <EarthIcon />
     </div>
     <p class="loading-text" />
   </main>
@@ -15,7 +18,7 @@
   <Main data={data.data} image={data.image} />
 {:catch}
   <main>
-    <img src="/error.svg" alt="" />
+    <Error />
     <p>Something went wrong</p>
   </main>
 {/await}
@@ -42,7 +45,7 @@
 
   .loading-text::after {
     content: "Fetching Covid Status";
-    animation: load-ellipsis 3s infinite linear;
+    animation: load-ellipsis 2s infinite linear;
   }
 
   @keyframes load-ellipsis {
