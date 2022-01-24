@@ -1,0 +1,85 @@
+<script>
+  import { getData } from "./services/api";
+  import Main from "./components/Main.svelte";
+</script>
+
+{#await getData()}
+  <main>
+    <div style="display: flex; gap: 10px">
+      <img src="/icon.svg" alt="" />
+      <img src="/earth-icon.svg" alt="" />
+    </div>
+    <p class="loading-text" />
+  </main>
+{:then data}
+  <Main data={data.data} image={data.image} />
+{:catch}
+  <main>
+    <img src="/error.svg" alt="" />
+    <p>Something went wrong</p>
+  </main>
+{/await}
+
+<style>
+  main {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  .loading-text::after {
+    content: "Fetching Covid Status";
+    animation: load-ellipsis 3s infinite linear;
+  }
+
+  @keyframes load-ellipsis {
+    0% {
+      content: "Fetching Covid Status";
+    }
+
+    12.5% {
+      content: "Fetching Covid Status.";
+    }
+
+    25% {
+      content: "Fetching Covid Status..";
+    }
+
+    37.5% {
+      content: "Fetching Covid Status...";
+    }
+
+    50% {
+      content: "Building Earth Map";
+    }
+
+    52.5% {
+      content: "Building Earth Map.";
+    }
+
+    75% {
+      content: "Building Earth Map..";
+    }
+
+    87.5% {
+      content: "Building Earth Map...";
+    }
+
+    100% {
+      content: "Building Earth Map...";
+    }
+  }
+</style>
