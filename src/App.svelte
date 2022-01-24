@@ -33,12 +33,6 @@
     gap: 20px;
   }
 
-  img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-  }
-
   p {
     text-align: center;
   }
